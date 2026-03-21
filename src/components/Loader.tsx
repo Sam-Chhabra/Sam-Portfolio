@@ -12,7 +12,7 @@ const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
 
   useEffect(() => {
     const animateSvg = async () => {
-      document.body.style.cursor = "wait";
+      document.body.style.cursor = "none";
       // Start the SVG animation
       await controls
         .start({
