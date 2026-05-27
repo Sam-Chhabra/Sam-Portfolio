@@ -81,8 +81,8 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       title: "SkyLink",
       category: "Drone communication network",
       year: "2024-25",
-      image: "/skylink-preview.png",
-      imageDetail: "/skylink-preview.png",
+      image: "/skylink-preview-new.png",
+      imageDetail: "/skylink-preview-new.png",
       description:
         "SkyLink is a distributed drone network simulator built in Rust, designed to model real-time communication between drones, clients, and servers over unreliable networks.\n\nThe system implements source routing, multi-threaded message passing, and dynamic topology changes, allowing nodes to operate independently while maintaining communication despite packet loss and node failures.\n\nIt simulates realistic networking conditions such as crashes, dropped packets, and runtime reconfiguration, providing a fault-tolerant distributed environment for testing communication protocols and system behavior.",
       color: "77, 128, 237",
@@ -116,8 +116,8 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       title: "ML Demand\nPrediction Model",
       category: "Machine Learning",
       year: "2021-Now",
-      image: "/ml-preview.png",
-      imageDetail: "/ml-preview.png",
+      image: "/ml-preview-new.png",
+      imageDetail: "/ml-preview-new.png",
       description:
         "This project focuses on predicting cumulative raw material deliveries using machine learning in an industrial setting. The model analyzes historical receivals and purchase orders to forecast future demand while minimizing overestimation risk through asymmetric quantile loss optimization.\n\nTwo complementary approaches were developed: a time series model using Prophet to capture trend and seasonality, and a global XGBoost model leveraging engineered features such as lags, rolling statistics, and backlog signals. The final pipeline applies domain-driven postprocessing to enforce realistic, monotonic forecasts aligned with real-world operational constraints.",
       technologies: {

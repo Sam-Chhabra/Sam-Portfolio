@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback, useMemo, lazy, Suspense } from "react";
 import "./assets/globals.scss";
+import { FlipWords } from "./components/ui/flip-words";
 import Navbar from "./components/hero/Navbar";
 import {
   motion,
@@ -175,7 +176,8 @@ function App() {
                 textShadow: "0px 0px 6px rgba(255,255,255,0.25)",
               }}
             >
-              Building scalable systems powered by{" "}
+              Hi, I'm Sam. <br />
+              I build <FlipWords words={["scalable", "secure", "modern"]} className="text-light text-center md:text-[80px] max-sm:text-[10vw] sm:text-[10vw]" /> systems powered by{" "}
               <motion.span
                 style={{
                   backgroundImage: useTransform(
@@ -204,7 +206,7 @@ function App() {
                 opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]),
               }}
             >
-              Full stack engineer with experience across distributed systems using modern cloud and AI technologies.
+              Full stack engineer with experience across distributed systems.
             </motion.p>
           </motion.div>
         </motion.div>
