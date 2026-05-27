@@ -163,7 +163,7 @@ function App() {
             className="flex justify-center items-center relative z-10 flex-col mt-8"
           >
             <motion.h1
-              className="md:text-[80px] max-sm:text-[10vw] sm:text-[10vw] max-sm:max-w-sm max-sm:leading-tight text-light khula-extrabold w-[732px] text-center leading-[85px]"
+              className="md:text-[80px] max-sm:text-[12vw] sm:text-[10vw] text-light khula-extrabold w-full max-w-[732px] px-4 text-center leading-tight md:leading-[85px]"
               style={{
                 transform: isMobile
                   ? "none"
@@ -177,7 +177,7 @@ function App() {
               }}
             >
               Hi, I'm Sam. <br />
-              I build <FlipWords words={["scalable", "secure", "modern"]} className="text-light text-center md:text-[80px] max-sm:text-[10vw] sm:text-[10vw]" /> systems powered by{" "}
+              I build <FlipWords words={["scalable", "secure", "modern"]} className="text-light text-center md:text-[80px] max-sm:text-[12vw] sm:text-[10vw]" /> systems powered by{" "}
               <motion.span
                 style={{
                   backgroundImage: useTransform(

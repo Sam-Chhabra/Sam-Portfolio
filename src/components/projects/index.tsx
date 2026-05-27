@@ -289,6 +289,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
                 key={project.number}
                 className="w-80 max-sm:w-[80vw] flex flex-col gap-y-4 items-center cursor-pointer"
                 variants={fadeInUpVariants}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleProjectClick(project)}
                 custom={index + 1}
               >
