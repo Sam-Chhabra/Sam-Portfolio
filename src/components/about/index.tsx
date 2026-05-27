@@ -64,7 +64,7 @@ const About: React.FC<AboutSectionProps> = ({
   return (
     <motion.div
       style={{ background: backgroundGradient }}
-      className="w-screen min-h-screen overflow-hidden flex justify-center items-center relative z-10"
+      className={`w-screen overflow-hidden flex justify-center items-center relative z-10 ${isMobile ? "py-20" : "min-h-screen"}`}
     >
       <motion.div
         initial={initialState}
@@ -74,7 +74,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.h1
           variants={fadeInUpVariants}
           custom={0}
-          className={`khula-semibold ${isMobile ? "text-4xl" : "text-6xl"}`}
+          className={`khula-semibold ${isMobile ? "text-xl leading-relaxed" : "text-6xl"}`}
         >
           I believe in building intelligent, scalable systems using AI and cloud technologies, focusing on solving real-world problems with clean and efficient engineering.
         </motion.h1>
@@ -94,14 +94,14 @@ const About: React.FC<AboutSectionProps> = ({
         </motion.div>
         <div
           className={`flex justify-between flex-row mt-16 ${
-            isMobile && "mt-8 flex-col"
+            isMobile ? "mt-8 flex-col gap-y-6" : ""
           }`}
         >
-          <div className="flex flex-col w-1/2">
+          <div className={`flex flex-col ${isMobile ? "w-full" : "w-1/2"}`}>
             <motion.h2
               variants={fadeInUpVariants}
               custom={2}
-              className="khula-light text-5xl text-nowrap"
+              className={`khula-light text-nowrap ${isMobile ? "text-3xl" : "text-5xl"}`}
             >
               Hi, I'm Sam
             </motion.h2>
@@ -120,15 +120,15 @@ const About: React.FC<AboutSectionProps> = ({
             )}
           </div>
           <div
-            className={`flex flex-col gap-y-4 w-1/2 khula-light text-2xl ${
-              isMobile && "mt-8 text-lg w-full"
+            className={`flex flex-col gap-y-4 khula-light ${
+              isMobile ? "text-base w-full" : "text-2xl w-1/2"
             }`}
           >
             <motion.p variants={fadeInUpVariants} custom={4}>
-              I’m a Computer Engineering student focused on building scalable systems and AI-powered applications. I work on developing real-world, production-ready solutions using modern cloud and software engineering practices.
+              I'm a Computer Engineering student focused on building scalable systems and AI-powered applications. I work on developing real-world, production-ready solutions using modern cloud and software engineering practices.
             </motion.p>
             <motion.p variants={fadeInUpVariants} custom={5}>
-              I’m involved across the full development process, from designing and building systems to testing and deployment. I focus on delivering scalable, high-quality solutions that solve real problems.
+              I'm involved across the full development process, from designing and building systems to testing and deployment. I focus on delivering scalable, high-quality solutions that solve real problems.
             </motion.p>
           </div>
           {isMobile && (

@@ -282,30 +282,36 @@ const Projects: React.FC<ProjectsSectionProps> = ({
             Selected Projects
           </motion.h2>
 
-          {/* Mobile Version: Card like design */}
-          <div className="grid grid-cols-2 grid-flow-row max-sm:grid-cols-1 gap-6 gap-y-32 px-4">
+          {/* Mobile Version: Clean list design matching desktop style */}
+          <div className="flex flex-col w-full px-6">
             {projects.map((project, index) => (
               <motion.div
                 key={project.number}
-                className="w-80 max-sm:w-[80vw] flex flex-col gap-y-4 items-center cursor-pointer"
+                className="flex flex-col w-full cursor-pointer"
                 variants={fadeInUpVariants}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleProjectClick(project)}
                 custom={index + 1}
               >
-                <div
-                  key={project.number}
-                  className="w-80 aspect-[77/44] max-sm:w-[80vw] bg-cover bg-center rounded-xl"
-                  style={{ backgroundImage: `url('${project.image}')` }}
-                ></div>
-                <h1 className="khula-regular text-4xl mt-8 whitespace-pre-line text-center">{project.title}</h1>
-                <hr />
-                <div className="flex flex-row justify-between items-center w-full">
-                  <p className="poppins-extralight text-lg whitespace-nowrap">
-                    {project.category}
-                  </p>
-                  <p className="poppins-extralight text-lg">{project.year}</p>
+                <div className="py-6">
+                  <div className="w-full aspect-[16/9] bg-cover bg-center rounded-xl mb-4"
+                    style={{ backgroundImage: `url('${project.image}')` }}
+                  ></div>
+                  <div className="flex items-start gap-x-3 mt-2">
+                    <p className="poppins-extralight text-base leading-none text-gray-3 pt-1">
+                      {project.number}
+                    </p>
+                    <div className="flex-1">
+                      <h1 className="khula-regular text-2xl whitespace-pre-line leading-tight">{project.title}</h1>
+                      <p className="poppins-extralight text-sm text-gray-3 mt-1">
+                        {project.category}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+                {index < projects.length - 1 && (
+                  <hr className="w-full border-gray-3" />
+                )}
               </motion.div>
             ))}
           </div>
