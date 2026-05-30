@@ -268,7 +268,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       style={{
         background: backgroundGradient,
         zIndex: isOverlayVisible ? 20 : 10,
-        willChange: "transform",
+        willChange: isOverlayVisible ? "auto" : "transform",
         backfaceVisibility: "hidden"
       }}
       initial={initialState}
