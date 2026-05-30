@@ -50,6 +50,7 @@ const About: React.FC<AboutSectionProps> = ({
   const lenis = useLenis();
 
   useEffect(() => {
+    if (isMobile) return; // On mobile, skip re-animation to prevent flashing
     if (isAboutInView && !hasAnimated) {
       aboutControls.start("visible");
       setHasAnimated(true);
@@ -57,7 +58,7 @@ const About: React.FC<AboutSectionProps> = ({
       aboutControls.start("hidden");
       setHasAnimated(false);
     }
-  }, [isAboutInView, aboutControls, hasAnimated, setHasAnimated]);
+  }, [isAboutInView, aboutControls, hasAnimated, setHasAnimated, isMobile]);
 
   const initialState = isMobile ? "visible" : "hidden";
 
@@ -74,7 +75,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.h1
           variants={fadeInUpVariants}
           custom={0}
-          className={`khula-semibold ${isMobile ? "text-xl leading-relaxed" : "text-6xl"}`}
+          className="khula-semibold text-3xl md:text-6xl leading-[1.4] md:leading-tight"
         >
           I believe in building intelligent, scalable systems using AI and cloud technologies, focusing on solving real-world problems with clean and efficient engineering.
         </motion.h1>
@@ -82,7 +83,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.div
           variants={fadeInUpVariants}
           custom={1}
-          className={`mt-[10vh] ${isMobile && "mt-8"}`}
+          className="mt-12 md:mt-[10vh]"
         >
           <p className="text-gray-3 poppins-light-italic ml-2 mb-1 select-none">
             This is me.
@@ -93,15 +94,13 @@ const About: React.FC<AboutSectionProps> = ({
           ></motion.hr>
         </motion.div>
         <div
-          className={`flex justify-between flex-row mt-16 ${
-            isMobile ? "mt-8 flex-col gap-y-6" : ""
-          }`}
+          className="flex justify-between flex-col md:flex-row mt-8 md:mt-16 gap-y-6 md:gap-y-0"
         >
-          <div className={`flex flex-col ${isMobile ? "w-full" : "w-1/2"}`}>
+          <div className="flex flex-col w-full md:w-1/2">
             <motion.h2
               variants={fadeInUpVariants}
               custom={2}
-              className={`khula-light text-nowrap ${isMobile ? "text-3xl" : "text-5xl"}`}
+              className="khula-light text-nowrap text-3xl md:text-5xl"
             >
               Hi, I'm Sam
             </motion.h2>
@@ -120,9 +119,7 @@ const About: React.FC<AboutSectionProps> = ({
             )}
           </div>
           <div
-            className={`flex flex-col gap-y-4 khula-light ${
-              isMobile ? "text-base w-full" : "text-2xl w-1/2"
-            }`}
+            className="flex flex-col gap-y-4 khula-light text-lg md:text-2xl w-full md:w-1/2"
           >
             <motion.p variants={fadeInUpVariants} custom={4}>
               I'm a Computer Engineering student focused on building scalable systems and AI-powered applications. I work on developing real-world, production-ready solutions using modern cloud and software engineering practices.
@@ -139,6 +136,12 @@ const About: React.FC<AboutSectionProps> = ({
                 document.getElementById("contact")?.scrollIntoView()
               }
               className="flex bg-dark rounded-full text-light pl-4 pr-6 gap-x-1 py-3 w-max h-fit poppins-regular select-none mt-8"
+              style={{
+                willChange: "transform, opacity",
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
+                transform: "translateZ(0)",
+              }}
             >
               <ArrowUpRight />
               Get in Touch

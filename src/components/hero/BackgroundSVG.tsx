@@ -109,7 +109,7 @@ const BackgroundSVG: React.FC<BackgroundSVGProps> = ({
   return (
     <motion.div
       style={{ opacity: svgOpacity }}
-      className="fixed top-0 flex w-full overflow-hidden h-full flex-col justify-center items-center z-[1]"
+      className={`${isMobile ? "absolute" : "fixed"} top-0 flex w-full overflow-hidden h-full flex-col justify-center items-center z-[1]`}
     >
       {width > 0 && height > 0 && (
         <>
@@ -118,7 +118,7 @@ const BackgroundSVG: React.FC<BackgroundSVGProps> = ({
             height={height}
             initial={initialState}
             animate={isLoading ? "hidden" : "visible"}
-            className="fixed top-0 left-0"
+            className={`${isMobile ? "absolute" : "fixed"} top-0 left-0`}
           >
             {renderSVGLines}
           </motion.svg>

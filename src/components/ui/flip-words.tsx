@@ -6,14 +6,17 @@ import { cn } from "../../lib/utils";
 export const FlipWords = ({
   words,
   duration = 3000,
+  initialDelay = 2000,
   className,
 }: {
   words: string[];
   duration?: number;
+  initialDelay?: number;
   className?: string;
 }) => {
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [isFirstRun, setIsFirstRun] = useState(true);
 
   const startAnimation = useCallback(() => {
     const word = words[words.indexOf(currentWord) + 1] || words[0];
@@ -22,11 +25,15 @@ export const FlipWords = ({
   }, [currentWord, words]);
 
   useEffect(() => {
-    if (!isAnimating)
-      setTimeout(() => {
+    if (!isAnimating) {
+      const delay = isFirstRun ? initialDelay : duration;
+      const timer = setTimeout(() => {
         startAnimation();
-      }, duration);
-  }, [isAnimating, duration, startAnimation]);
+        if (isFirstRun) setIsFirstRun(false);
+      }, delay);
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating, duration, startAnimation, isFirstRun, initialDelay]);
 
   return (
     <AnimatePresence
@@ -50,10 +57,10 @@ export const FlipWords = ({
         }}
         exit={{
           opacity: 0,
-          y: -40,
-          x: 40,
+          y: -20,
+          x: 10,
           filter: "blur(8px)",
-          scale: 2,
+          scale: 1.2,
           position: "absolute",
         }}
         className={cn(

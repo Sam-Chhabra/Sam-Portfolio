@@ -148,6 +148,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
   ];
 
   useEffect(() => {
+    if (isMobile) return; // On mobile, skip re-animation to prevent flashing
     if (isProjectsInView && !hasAnimated) {
       projectsControls.start("visible");
       setTimeout(() => {
@@ -157,7 +158,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       projectsControls.start("hidden");
       setHasAnimated(false);
     }
-  }, [isProjectsInView, projectsControls, hasAnimated, setHasAnimated]);
+  }, [isProjectsInView, projectsControls, hasAnimated, setHasAnimated, isMobile]);
 
   // ----- Hover effect ----- //
 
@@ -271,6 +272,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       initial={initialState}
       animate={projectsControls}
       className="w-screen min-h-screen flex justify-center flex-col items-center relative z-10"
+      style={{ willChange: "transform", backfaceVisibility: "hidden" }}
     >
       {isTouchDevice || (!isTouchDevice && isMobile) ? (
         <motion.div>
@@ -283,7 +285,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
           </motion.h2>
 
           {/* Mobile Version: Clean list design matching desktop style */}
-          <div className="flex flex-col w-full px-6">
+          <div className="flex flex-col w-full px-3">
             {projects.map((project, index) => (
               <motion.div
                 key={project.number}
@@ -292,17 +294,18 @@ const Projects: React.FC<ProjectsSectionProps> = ({
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleProjectClick(project)}
                 custom={index + 1}
+                style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
               >
-                <div className="py-6">
-                  <div className="w-full aspect-[16/9] bg-cover bg-center rounded-xl mb-4"
+                <div className="py-5">
+                  <div className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl mb-4 shadow-sm"
                     style={{ backgroundImage: `url('${project.image}')` }}
                   ></div>
-                  <div className="flex items-start gap-x-3 mt-2">
-                    <p className="poppins-extralight text-base leading-none text-gray-3 pt-1">
+                  <div className="flex items-start gap-x-4 mt-2">
+                    <p className="poppins-extralight text-xl leading-none text-gray-3 pt-1">
                       {project.number}
                     </p>
                     <div className="flex-1">
-                      <h1 className="khula-regular text-2xl whitespace-pre-line leading-tight">{project.title}</h1>
+                      <h1 className="khula-regular text-3xl whitespace-pre-line leading-tight">{project.title}</h1>
                       <p className="poppins-extralight text-sm text-gray-3 mt-1">
                         {project.category}
                       </p>

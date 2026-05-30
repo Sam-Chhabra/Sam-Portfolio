@@ -23,6 +23,16 @@ body,
 html {
   overflow-x: hidden;
   background-color: var(--dark);
+  -webkit-overflow-scrolling: touch;
+  overflow-anchor: auto;
+}
+
+/* Prevent mobile compositing artifacts */
+@media (max-width: 768px) {
+  #root {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 }
 
 .contact-bg {

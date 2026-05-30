@@ -33,6 +33,7 @@ const Contact: React.FC<ContactSectionProps> = ({
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
+    if (isMobile) return; // On mobile, skip re-animation to prevent flashing
     if (isContactInView && !hasAnimated) {
       contactControls.start("visible");
       setHasAnimated(true);
@@ -40,7 +41,7 @@ const Contact: React.FC<ContactSectionProps> = ({
       contactControls.start("hidden");
       setHasAnimated(false);
     }
-  }, [isContactInView, contactControls, hasAnimated, setHasAnimated]);
+  }, [isContactInView, contactControls, hasAnimated, setHasAnimated, isMobile]);
 
   const initialState = isMobile ? "visible" : "hidden";
 
@@ -51,6 +52,7 @@ const Contact: React.FC<ContactSectionProps> = ({
       className={`w-screen contact-bg ${
         isMobile ? "before:bg-none after:bg-none" : "before:block after:block"
       } min-h-screen overflow-hidden flex flex-col justify-end items-center gap-y-4 relative z-[2]`}
+      style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
     >
       <motion.h2
         custom={0}
@@ -62,14 +64,15 @@ const Contact: React.FC<ContactSectionProps> = ({
       <motion.h1
         custom={1}
         variants={fadeInUpVariants}
-        className="khula-semibold text-7xl text-center px-4"
+        className={`khula-semibold text-center px-4 ${isMobile ? "text-5xl" : "text-7xl"}`}
       >
         Let's have a chat!
       </motion.h1>
       <motion.div
         custom={2}
         variants={fadeInUpVariants}
-        className="flex flex-row gap-x-6 items-center mt-[14vh]"
+        className={`flex flex-row gap-x-6 items-center ${isMobile ? "mt-[8vh]" : "mt-[14vh]"}`}
+        style={{ willChange: "transform, opacity", backfaceVisibility: "hidden", transform: "translateZ(0)" }}
       >
         <Magnetic>
           <a
@@ -104,16 +107,17 @@ const Contact: React.FC<ContactSectionProps> = ({
       <motion.div
         custom={3}
         variants={fadeInUpVariants}
-        className="flex flex-col items-center mt-[5vh]"
+        className={`flex flex-col items-center ${isMobile ? "mt-[3vh]" : "mt-[5vh]"}`}
+        style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
       >
         <p className="poppins-regular text-2xl">sc</p>
         <p className="poppins-extralight text-2xl">Sam Chhabra</p>
 
-        <p className="poppins-light px-4 text-gray-3 tracking-[calc(-1rem*0.03)] mt-[8vh] select-none mb-1 text-center">
+        <p className={`poppins-light px-4 text-gray-3 tracking-[calc(-1rem*0.03)] select-none mb-1 text-center ${isMobile ? "mt-[4vh]" : "mt-[8vh]"}`}>
           © Sam Chhabra {new Date().getFullYear()}. All rights reserved.
           Location: Italy, UK
         </p>
-        <p className="poppins-light px-4 text-gray-3 select-none tracking-[calc(-1rem*0.03)] mb-8 max-w-[500px] text-center">
+        <p className={`poppins-light px-4 text-gray-3 select-none tracking-[calc(-1rem*0.03)] max-w-[500px] text-center ${isMobile ? "mb-4" : "mb-8"}`}>
           This site showcases my personal projects and professional work.
           Content may not be used without permission.
         </p>
