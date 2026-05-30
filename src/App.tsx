@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback, useMemo, lazy, Suspense } from "react";
+import { useEffect, useState, useRef, useCallback, lazy, Suspense } from "react";
 import "./assets/globals.scss";
 import { FlipWords } from "./components/ui/flip-words";
 import Navbar from "./components/hero/Navbar";

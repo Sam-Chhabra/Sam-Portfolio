@@ -268,11 +268,12 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       style={{
         background: backgroundGradient,
         zIndex: isOverlayVisible ? 20 : 10,
+        willChange: "transform",
+        backfaceVisibility: "hidden"
       }}
       initial={initialState}
       animate={projectsControls}
       className="w-screen min-h-screen flex justify-center flex-col items-center relative z-10"
-      style={{ willChange: "transform", backfaceVisibility: "hidden" }}
     >
       {isTouchDevice || (!isTouchDevice && isMobile) ? (
         <motion.div>
