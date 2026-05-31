@@ -73,7 +73,7 @@ function AnimatedShape({
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      className={`${isMobile ? "absolute" : "fixed"} top-0 left-0`}
+      className="fixed top-0 left-0 "
     >
       <motion.path
         ref={scope}

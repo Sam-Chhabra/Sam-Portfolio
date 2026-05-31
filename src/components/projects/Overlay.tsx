@@ -13,7 +13,7 @@ export default function Overlay({
   return (
     <motion.div
       data-lenis-prevent
-      className="text-white fixed top-0 left-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden px-4 flex justify-center pb-12"
+      className="text-white inset-0 overflow-y-scroll overflow-x-hidden fixed max-h-[100vh] px-4 w-full flex justify-center pb-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}

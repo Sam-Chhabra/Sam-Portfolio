@@ -268,8 +268,6 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       style={{
         background: backgroundGradient,
         zIndex: isOverlayVisible ? 20 : 10,
-        willChange: isOverlayVisible ? "auto" : "transform",
-        backfaceVisibility: "hidden"
       }}
       initial={initialState}
       animate={projectsControls}

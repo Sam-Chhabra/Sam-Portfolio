@@ -14,18 +14,12 @@ export default function Curve({ isVisible }: CurveProps) {
 
   useEffect(() => {
     function resize() {
-      if (window.innerWidth <= 768) return; // Prevent resize glitches on mobile
       setDimensions({
         width: window.innerWidth,
         height: window.innerHeight,
       });
     }
-    // Initialize dimensions
-    setDimensions({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-    
+    resize();
     window.addEventListener("resize", resize);
     return () => {
       window.removeEventListener("resize", resize);
