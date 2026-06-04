@@ -38,24 +38,39 @@ function AnimatedShape({
   const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
+    let isActive = true;
+    
     const runAnimation = async () => {
-      // Draw the outline
-      await animate(scope.current, { pathLength: 1 }, { duration: 1.5 });
-      // Fill the shape
-      await animate(scope.current, { fillOpacity: 1 }, { duration: 0.5 });
-      // Move the shape down
-      await animate(scope.current, { y: "50%" }, { duration: 1 });
-      onComplete();
+      try {
+        if (!isActive || !scope.current) return;
+        // Draw the outline
+        await animate(scope.current, { pathLength: 1 }, { duration: 1.5 });
+        
+        if (!isActive || !scope.current) return;
+        // Fill the shape
+        await animate(scope.current, { fillOpacity: 1 }, { duration: 0.5 });
+        
+        if (!isActive || !scope.current) return;
+        // Move the shape down
+        await animate(scope.current, { y: "50%" }, { duration: 1 });
+        
+        if (isActive) {
+          onComplete();
+        }
+      } catch (error) {
+        // Animation was cancelled or component unmounted
+      }
     };
 
     animationRef.current = requestAnimationFrame(runAnimation);
 
     return () => {
+      isActive = false;
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [animate, onComplete]);
+  }, [animate, onComplete, scope]);
 
   const centerX = width / 2;
   const yStart = (height * 2) / 3;
