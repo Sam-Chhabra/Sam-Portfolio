@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 
+function getIsTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+
 export function useIsTouchDevice() {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(getIsTouchDevice);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(pointer: coarse)");
@@ -11,8 +16,8 @@ export function useIsTouchDevice() {
       setIsTouchDevice(e.matches);
     };
 
-    mediaQuery.addListener(handleChange);
-    return () => mediaQuery.removeListener(handleChange);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
   return isTouchDevice;

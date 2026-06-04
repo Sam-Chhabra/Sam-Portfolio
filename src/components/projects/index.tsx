@@ -6,7 +6,7 @@ import {
   useSpring,
   useAnimationControls,
 } from "framer-motion";
-import { useIsTouchDevice } from "../../hooks/useIsTouchDevice";
+
 import Curve from "./Curve";
 import Overlay from "./Overlay";
 import { X } from "lucide-react";
@@ -67,7 +67,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  const isTouchDevice = useIsTouchDevice();
+
 
   const projectsControls = useAnimationControls();
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -273,8 +273,9 @@ const Projects: React.FC<ProjectsSectionProps> = ({
       animate={projectsControls}
       className="w-screen min-h-screen flex justify-center flex-col items-center relative z-10"
     >
-      {isTouchDevice || (!isTouchDevice && isMobile) ? (
-        <motion.div>
+      {/* Mobile Version: always rendered, hidden via CSS on desktop */}
+      <div className="md:hidden w-full">
+        <motion.div initial="visible" animate="visible">
           <motion.h2
             custom={0}
             variants={fadeInUpVariants}
@@ -283,7 +284,6 @@ const Projects: React.FC<ProjectsSectionProps> = ({
             Selected Projects
           </motion.h2>
 
-          {/* Mobile Version: Clean list design */}
           <div className="flex flex-col w-full px-4">
             {projects.map((project, index) => (
               <motion.div
@@ -317,11 +317,14 @@ const Projects: React.FC<ProjectsSectionProps> = ({
             ))}
           </div>
         </motion.div>
-      ) : (
+      </div>
+
+      {/* Desktop Version: always rendered, hidden via CSS on mobile */}
+      <div className="hidden md:block w-full">
         <motion.div
           initial="hidden"
           animate={projectsControls}
-          className="max-w-[1000px] w-full flex justify-center flex-col items-center px-4"
+          className="max-w-[1000px] w-full flex justify-center flex-col items-center px-4 mx-auto"
         >
           <motion.h2
             custom={0}
@@ -403,7 +406,7 @@ const Projects: React.FC<ProjectsSectionProps> = ({
             ))}
           </div>
         </motion.div>
-      )}
+      </div>
 
       <AnimatePresence>
         {(isOverlayVisible || selectedProject) && (

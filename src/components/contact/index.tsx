@@ -55,14 +55,14 @@ const Contact: React.FC<ContactSectionProps> = ({
       <motion.h2
         custom={0}
         variants={fadeInUpVariants}
-        className={`poppins-medium ${isMobile ? "text-xl" : "text-2xl"} text-gray-3 px-4 text-center`}
+        className="poppins-medium text-xl md:text-2xl text-gray-3 px-4 text-center"
       >
         Want to collaborate?
       </motion.h2>
       <motion.h1
         custom={1}
         variants={fadeInUpVariants}
-        className={`khula-semibold ${isMobile ? "text-5xl" : "text-7xl"} text-center px-4`}
+        className="khula-semibold text-5xl md:text-7xl text-center px-4"
       >
         Let's have a chat!
       </motion.h1>
