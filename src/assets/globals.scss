@@ -25,25 +25,11 @@ html {
   background-color: var(--dark);
 }
 
-// Performance: allow browser to skip rendering off-screen sections
-#about,
-#projects,
-#contact {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 100vh;
-}
-
 // Mobile compositing fixes — prevent ghosting on buttons/elements during scroll
 @media (max-width: 768px) {
   button, a, .contact-bg {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  // Promote sections to GPU layers on mobile for smoother scrolling
-  #about, #projects, #contact {
-    -webkit-transform: translateZ(0);
     transform: translateZ(0);
   }
 }
