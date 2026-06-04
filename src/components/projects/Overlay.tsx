@@ -5,7 +5,6 @@ import Magnetic from "../Magnetic";
 
 export default function Overlay({
   project,
-  isMobile,
 }: {
   project: Project;
   isMobile: boolean;
@@ -13,20 +12,19 @@ export default function Overlay({
   return (
     <motion.div
       data-lenis-prevent
-      className="text-white inset-0 overflow-y-scroll overflow-x-hidden fixed max-h-[100vh] px-4 w-full flex justify-center pb-12"
+      className="text-white fixed top-0 left-0 w-full h-[100dvh] overflow-y-auto overflow-x-hidden px-4 flex justify-center pb-12"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.4 }}
     >
       <div
-        style={{ marginTop: !isMobile ? "20vh" : "2.5rem" }}
-        className="max-w-[1000px] w-full"
+        className="max-w-[1000px] w-full mt-10 md:mt-[20vh]"
       >
         <div
-          className={`flex flex-row items-center ${!isMobile ? "justify-between" : "justify-start gap-x-2"} w-full mb-[4vh] pr-12`}
+          className="flex flex-row items-center justify-start gap-x-2 md:justify-between w-full mb-[4vh] pr-12"
         >
-          <h1 className="khula-regular max-sm:text-[12vw] text-8xl tracking-[calc(6rem * 0.03)]">
+          <h1 className="khula-regular text-4xl md:text-8xl tracking-[calc(6rem * 0.03)] whitespace-pre-line">
             {project.title}
           </h1>
           <div className="flex items-center gap-0">
@@ -45,15 +43,12 @@ export default function Overlay({
         </div>
 
         <div className="flex flex-col">
-          <div
-            className="flex flex-row gap-x-12"
-            style={{ flexDirection: isMobile ? "column" : "row" }}
-          >
+          <div className="flex flex-col md:flex-row gap-x-12">
             <div>
               <p className="khula-light text-sm tracking-[calc(0.875rem * 0.05)] uppercase text-gray-1">
                 Description
               </p>
-              <hr className="w-[350px] border-gray-2 mt-2" />
+              <hr className="max-w-[350px] w-full border-gray-2 mt-2" />
               <div className="poppins-regular text-base text-gray-1 overflow-y-auto overflow-x-hidden mt-8 mb-[4vh] max-w-[500px] w-full whitespace-pre-wrap">
                 {project.description}
               </div>
@@ -62,7 +57,7 @@ export default function Overlay({
               <p className="khula-light text-sm tracking-[calc(0.875rem * 0.05)] uppercase text-gray-1">
                 Technologies
               </p>
-              <hr className="w-[350px] border-gray-2 mt-2" />
+              <hr className="max-w-[350px] w-full border-gray-2 mt-2" />
               <div className="poppins-regular text-base text-gray-1 mt-8 mb-[4vh] max-w-[500px] w-full flex-col flex">
                 {Object.entries(project.technologies).map(([key, value]) => (
                   <p key={key} className="poppins-regular text-base text-gray-1 mt-1">

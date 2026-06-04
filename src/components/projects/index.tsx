@@ -294,17 +294,17 @@ const Projects: React.FC<ProjectsSectionProps> = ({
                 onClick={() => handleProjectClick(project)}
                 custom={index + 1}
               >
-                <div className="py-5">
-                  <div className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl mb-4"
+                <div className="py-4">
+                  <div className="w-full aspect-[16/10] bg-contain bg-center bg-no-repeat rounded-xl mb-3 bg-gray-4"
                     style={{ backgroundImage: `url('${project.image}')` }}
                   ></div>
-                  <div className="flex items-start gap-x-4 mt-2">
-                    <p className="poppins-extralight text-xl leading-none text-gray-3 pt-1">
+                  <div className="flex items-start gap-x-3 mt-1">
+                    <p className="poppins-extralight text-lg leading-none text-gray-3 pt-1">
                       {project.number}
                     </p>
                     <div className="flex-1">
-                      <h1 className="khula-regular text-3xl whitespace-pre-line leading-tight">{project.title}</h1>
-                      <p className="poppins-extralight text-sm text-gray-3 mt-1">
+                      <h1 className="khula-regular text-2xl whitespace-pre-line leading-tight">{project.title}</h1>
+                      <p className="poppins-extralight text-xs text-gray-3 mt-1">
                         {project.category}
                       </p>
                     </div>
