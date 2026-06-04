@@ -283,8 +283,8 @@ const Projects: React.FC<ProjectsSectionProps> = ({
             Selected Projects
           </motion.h2>
 
-          {/* Mobile Version: Clean list design matching desktop style */}
-          <div className="flex flex-col w-full px-3">
+          {/* Mobile Version: Clean list design */}
+          <div className="flex flex-col w-full px-4">
             {projects.map((project, index) => (
               <motion.div
                 key={project.number}
@@ -293,10 +293,9 @@ const Projects: React.FC<ProjectsSectionProps> = ({
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleProjectClick(project)}
                 custom={index + 1}
-                style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
               >
                 <div className="py-5">
-                  <div className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl mb-4 shadow-sm"
+                  <div className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl mb-4"
                     style={{ backgroundImage: `url('${project.image}')` }}
                   ></div>
                   <div className="flex items-start gap-x-4 mt-2">

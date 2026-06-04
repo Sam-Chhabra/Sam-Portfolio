@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback, lazy, Suspense } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo, lazy, Suspense } from "react";
 import "./assets/globals.scss";
 import { FlipWords } from "./components/ui/flip-words";
 import Navbar from "./components/hero/Navbar";
@@ -34,18 +34,12 @@ const setBgColorSafe = (color: string) => {
 };
 
 function App() {
-  const [dimensions, setDimensions] = useState({ 
-    width: typeof window !== "undefined" ? window.innerWidth : 0, 
-    height: typeof window !== "undefined" ? window.innerHeight : 0 
-  });
-  const dimensionsRef = useRef({ 
-    width: typeof window !== "undefined" ? window.innerWidth : 0, 
-    height: typeof window !== "undefined" ? window.innerHeight : 0 
-  });
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const dimensionsRef = useRef({ width: 0, height: 0 });
   const aboutRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const isMobile = dimensions.width <= 768;
+  const isMobile = useMemo(() => window.innerWidth <= 768, []);
 
   const isTouchDevice = useIsTouchDevice();
 
@@ -82,7 +76,7 @@ function App() {
       requestAnimationFrame(() => {
         const progress = !isMobile
           ? Math.max(0, Math.min((latest - 0.1) / 0.1, 1))
-          : Math.max(0, Math.min((latest - 0.01) / 0.06, 1));
+          : Math.max(0, Math.min((latest - 0.03) / 0.1, 1));
 
         const startColor = [0, 0, 0];
         const endColor = [255, 255, 255]; // #FFFFFF
@@ -152,9 +146,7 @@ function App() {
         <MouseGradient isMobile={isMobile} />
         <motion.div
           style={{ background: backgroundGradient }}
-          className={`w-screen overflow-hidden h-screen flex flex-col justify-center items-center ${
-            isMobile ? "relative" : ""
-          }`}
+          className="w-screen overflow-hidden h-screen flex flex-col justify-center items-center "
         >
           <BackgroundSVG
             width={dimensions.width}
@@ -169,10 +161,9 @@ function App() {
             animate={isLoading ? "hidden" : "visible"}
             variants={landingSectionVariants}
             className="flex justify-center items-center relative z-10 flex-col mt-8"
-            style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
           >
             <motion.h1
-              className="md:text-[80px] max-sm:text-[10.5vw] sm:text-[10vw] text-light khula-extrabold w-full max-w-[732px] px-4 text-center leading-tight md:leading-[85px]"
+              className="md:text-[80px] max-sm:text-[10vw] sm:text-[10vw] text-light khula-extrabold w-full max-w-[732px] px-4 text-center leading-tight md:leading-[85px]"
               style={{
                 transform: isMobile
                   ? "none"
@@ -181,16 +172,12 @@ function App() {
                       [0, 0.5],
                       ["translateY(0px)", "translateY(-200px)"]
                     ),
-                opacity: isMobile
-                  ? useTransform(scrollYProgress, [0, 0.08], [1, 0])
-                  : useTransform(scrollYProgress, [0, 0.3], [1, 0]),
+                opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]),
                 textShadow: "0px 0px 6px rgba(255,255,255,0.25)",
-                willChange: "transform, opacity",
-                backfaceVisibility: "hidden",
               }}
             >
               Hi, I'm Sam. <br />
-              I build <FlipWords words={["scalable", "secure", "modern"]} className="text-light text-center md:text-[80px] max-sm:text-[10.5vw] sm:text-[10vw]" /> systems powered by{" "}
+              I build <FlipWords words={["scalable", "secure", "modern"]} className="text-light text-center md:text-[80px] max-sm:text-[10vw] sm:text-[10vw]" /> systems powered by{" "}
               <motion.span
                 style={{
                   backgroundImage: useTransform(
@@ -216,19 +203,15 @@ function App() {
                       [0, 0.5],
                       ["translateY(0px)", "translateY(-200px)"]
                     ),
-                opacity: isMobile
-                  ? useTransform(scrollYProgress, [0, 0.08], [1, 0])
-                  : useTransform(scrollYProgress, [0, 0.3], [1, 0]),
-                willChange: "transform, opacity",
-                backfaceVisibility: "hidden",
+                opacity: useTransform(scrollYProgress, [0, 0.3], [1, 0]),
               }}
             >
               Full stack engineer with experience across distributed systems.
             </motion.p>
           </motion.div>
         </motion.div>
-        <div ref={aboutRef} id="about" style={{ position: "relative", zIndex: 5 }}>
-          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#ffffff" }}></div>}>
+        <div ref={aboutRef} id="about">
+          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
             <About
               isAboutInView={useInView(aboutRef, { amount: 0.3 })}
               isMobile={isMobile}
@@ -237,10 +220,10 @@ function App() {
           </Suspense>
         </div>
 
-        <SectionSpacer height={isMobile ? 100 : 300} backgroundGradient={backgroundGradient} />
+        <SectionSpacer height={300} backgroundGradient={backgroundGradient} />
 
-        <div ref={projectsRef} id="projects" className="relative" style={{ position: "relative", zIndex: 5 }}>
-          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#ffffff" }}></div>}>
+        <div ref={projectsRef} id="projects" className="relative">
+          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
             <Projects
               isProjectsInView={useInView(projectsRef, {
                 amount: isTouchDevice ? 0.1 : 0.3,
@@ -251,8 +234,8 @@ function App() {
           </Suspense>
         </div>
 
-        <div ref={contactRef} id="contact" className="relative" style={{ position: "relative", zIndex: 5 }}>
-          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#ffffff" }}></div>}>
+        <div ref={contactRef} id="contact" className="relative">
+          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
             <Contact
               isContactInView={useInView(contactRef, { amount: 0.5 })}
               isMobile={isMobile}

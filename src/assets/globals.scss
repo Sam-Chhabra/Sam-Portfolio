@@ -23,14 +23,13 @@ body,
 html {
   overflow-x: hidden;
   background-color: var(--dark);
-  -webkit-overflow-scrolling: touch;
-  overflow-anchor: auto;
 }
 
-/* Prevent mobile compositing artifacts */
+// Mobile compositing fixes — prevent ghosting on buttons/elements during scroll
 @media (max-width: 768px) {
-  #root {
-    -webkit-transform: translateZ(0);
+  button, a, .contact-bg {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     transform: translateZ(0);
   }
 }
