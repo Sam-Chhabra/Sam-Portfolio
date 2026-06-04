@@ -82,7 +82,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.div
           variants={fadeInUpVariants}
           custom={1}
-          className="mt-8 md:mt-[10vh]"
+          className="mt-8 md:mt-16"
         >
           <p className="text-gray-3 poppins-light-italic ml-2 mb-1 select-none">
             This is me.
