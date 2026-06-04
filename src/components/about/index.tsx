@@ -74,7 +74,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.h1
           variants={fadeInUpVariants}
           custom={0}
-          className="khula-semibold text-3xl leading-[1.4] md:text-6xl md:leading-normal"
+          className="khula-semibold text-3xl leading-[1.4] md:text-4xl md:leading-[1.4]"
         >
           I believe in building intelligent, scalable systems using AI and cloud technologies, focusing on solving real-world problems with clean and efficient engineering.
         </motion.h1>
@@ -82,7 +82,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.div
           variants={fadeInUpVariants}
           custom={1}
-          className="mt-8 md:mt-16"
+          className="mt-8 md:mt-12"
         >
           <p className="text-gray-3 poppins-light-italic ml-2 mb-1 select-none">
             This is me.
@@ -92,7 +92,7 @@ const About: React.FC<AboutSectionProps> = ({
             className="bg-gray-3 origin-left w-full"
           ></motion.hr>
         </motion.div>
-        <div className="flex justify-between flex-col mt-8 md:flex-row md:mt-16">
+        <div className="flex justify-between flex-col mt-8 md:flex-row md:mt-12">
           <div className="flex flex-col w-full md:w-1/2">
             <motion.h2
               variants={fadeInUpVariants}
@@ -108,7 +108,7 @@ const About: React.FC<AboutSectionProps> = ({
                   variants={fadeInUpVariants}
                   custom={3}
                   onClick={() => lenis?.scrollTo("#contact")}
-                  className="flex bg-dark rounded-full text-light pl-4 pr-6 gap-x-1 py-3 w-max poppins-regular mt-24 select-none"
+                  className="flex bg-dark rounded-full text-light pl-4 pr-6 gap-x-1 py-3 w-max poppins-regular mt-8 md:mt-12 select-none"
                 >
                   <ArrowUpRight />
                   Get in Touch
