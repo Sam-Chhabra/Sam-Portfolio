@@ -16,12 +16,23 @@ export const useColorAnimation = () => {
   const hue2 = useTransform(baseHue, (h) => mapHue((h + 60) % 360));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      baseHue.set(baseHue.get() - 1);
-    }, 50);
+    let rafId: number;
+    let lastTime = performance.now();
 
-    return () => clearInterval(interval);
+    const tick = (now: number) => {
+      const delta = now - lastTime;
+      // Advance ~1 unit per 50ms (same speed as before)
+      if (delta >= 50) {
+        baseHue.set(baseHue.get() - Math.floor(delta / 50));
+        lastTime = now - (delta % 50);
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, [baseHue]);
 
   return { hue1, hue2 };
 };
+

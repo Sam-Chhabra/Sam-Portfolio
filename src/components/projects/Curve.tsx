@@ -13,15 +13,24 @@ export default function Curve({ isVisible }: CurveProps) {
   const controls = useAnimationControls();
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
     function resize() {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setDimensions({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }, 200);
     }
-    resize();
+    // Set initial dimensions immediately
+    setDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
     window.addEventListener("resize", resize);
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener("resize", resize);
     };
   }, []);

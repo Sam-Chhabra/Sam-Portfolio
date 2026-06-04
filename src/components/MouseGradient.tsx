@@ -75,37 +75,52 @@ const MouseGradient = ({ isMobile }: { isMobile: boolean }) => {
   }, []);
 
   useEffect(() => {
+    let lastRange = '';
+
     const handleScroll = () => {
-      if (scrollYProgress.get() > 0.2 && scrollYProgress.get() < 0.4) {
-        const t = (scrollYProgress.get() - 0.2) / 0.2; // normalize to 0-1
-        setButtonProps({
-          color: `rgb(${Math.round(255 * (1 - t))}, ${Math.round(
-            255 * (1 - t),
-          )}, ${Math.round(255 * (1 - t))})`,
-          backgroundColor: `rgba(255, 255, 255, ${t})`,
-        });
-        setTextColor("transparent");
-      } else if (scrollYProgress.get() <= 0.2) {
+      const progress = scrollYProgress.get();
+      let range: string;
+
+      if (progress <= 0.2) {
+        range = 'light';
+      } else if (progress > 0.2 && progress < 0.4) {
+        range = 'mid';
+      } else {
+        range = 'dark';
+      }
+
+      // Only update React state when the range changes
+      if (range === lastRange) return;
+      lastRange = range;
+
+      if (range === 'light') {
         setTextColor("white");
         setButtonProps({
           color: "rgb(255, 255, 255)",
           backgroundColor: "rgba(0, 0, 0, 0)",
         });
-      } else if (scrollYProgress.get() >= 0.4) {
+      } else if (range === 'mid') {
+        // Snap to mid-transition values
+        setTextColor("transparent");
+        setButtonProps({
+          color: "rgb(128, 128, 128)",
+          backgroundColor: "rgba(255, 255, 255, 0.5)",
+        });
+      } else {
+        setTextColor("transparent");
         setButtonProps({
           color: "rgb(0, 0, 0)",
           backgroundColor: "rgb(255, 255, 255)",
         });
-        setTextColor("transparent");
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [setButtonProps]);
+  }, [setButtonProps, scrollYProgress]);
 
   return (
     <>

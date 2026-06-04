@@ -74,6 +74,7 @@ export default function Overlay({
           </div>
           <img
             alt={`${project.title} detailed preview`}
+            loading="lazy"
             className={`w-full object-cover object-top rounded-2xl select-none ${!project.title.includes("TCG") && "mb-12"}`}
             style={
               !project.title.includes("SkyLink") 

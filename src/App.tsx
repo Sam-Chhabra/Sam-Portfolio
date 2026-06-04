@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback, useMemo, lazy, Suspense } from "react";
+import { useEffect, useState, useRef, useCallback, lazy, Suspense, useMemo } from "react";
 import "./assets/globals.scss";
 import { FlipWords } from "./components/ui/flip-words";
 import Navbar from "./components/hero/Navbar";
@@ -71,9 +71,14 @@ function App() {
   const textColor = useMotionValue("#FFFFFF");
   const svgOpacity = useMotionValue(1);
 
+  const rafPending = useRef(false);
+
   const handleScroll = useCallback(
     (latest: number) => {
+      if (rafPending.current) return;
+      rafPending.current = true;
       requestAnimationFrame(() => {
+        rafPending.current = false;
         const progress = !isMobile
           ? Math.max(0, Math.min((latest - 0.1) / 0.1, 1))
           : Math.max(0, Math.min((latest - 0.03) / 0.1, 1));
@@ -211,7 +216,7 @@ function App() {
           </motion.div>
         </motion.div>
         <div ref={aboutRef} id="about">
-          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
+          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#000" }}></div>}>
             <About
               isAboutInView={useInView(aboutRef, { amount: 0.3 })}
               isMobile={isMobile}
@@ -223,7 +228,7 @@ function App() {
         <SectionSpacer height={300} backgroundGradient={backgroundGradient} />
 
         <div ref={projectsRef} id="projects" className="relative">
-          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
+          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#fff" }}></div>}>
             <Projects
               isProjectsInView={useInView(projectsRef, {
                 amount: isTouchDevice ? 0.1 : 0.3,
@@ -235,7 +240,7 @@ function App() {
         </div>
 
         <div ref={contactRef} id="contact" className="relative">
-          <Suspense fallback={<div style={{ minHeight: "100vh" }}></div>}>
+          <Suspense fallback={<div style={{ minHeight: "100vh", background: "#fff" }}></div>}>
             <Contact
               isContactInView={useInView(contactRef, { amount: 0.5 })}
               isMobile={isMobile}
