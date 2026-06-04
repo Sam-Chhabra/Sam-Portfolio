@@ -74,7 +74,7 @@ const About: React.FC<AboutSectionProps> = ({
         <motion.h1
           variants={fadeInUpVariants}
           custom={0}
-          className="khula-semibold text-3xl leading-[1.4] md:text-4xl md:leading-[1.4]"
+          className="khula-semibold text-3xl leading-[1.4] md:text-5xl md:leading-[1.4]"
         >
           I believe in building intelligent, scalable systems using AI and cloud technologies, focusing on solving real-world problems with clean and efficient engineering.
         </motion.h1>
